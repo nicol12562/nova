@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,300;1,600&family=Space+Grotesk:wght@300;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #c9a227;
+  --gold-soft: #d4b44a;
+  --gold-deep: #8a6e12;
+  --violet: #7c3aed;
+  --violet-deep: #5b21b6;
+  --ink: #0a0a0f;
+  --surface: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(ellipse at 20% 0%, #1a1030 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 100%, #2d1b4d 0%, transparent 60%),
+              linear-gradient(180deg, #0a0a0f 0%, #0f0b14 100%);
+  min-height: 100vh;
+  color: #f0e6ff;
+  overflow-x: hidden;
+}
+
+/* ====== LANDING ROOT ====== */
+.container { max-width: 1200px; margin: 0 auto; padding: 120px 40px 80px; text-align: center; }
+.container h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic; font-size: clamp(5rem, 12vw, 8rem); letter-spacing: -0.05em; line-height: 0.85; color: #fff; text-shadow: 0 0 80px rgba(201,162,39,0.3); }
+.container h1 span { display: block; font-family: 'Space Grotesk', sans-serif; font-style: normal; font-weight: 300; font-size: 0.35em; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-top: 20px; }
+.container p { font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.55); font-size: 1.15rem; margin: 30px auto 60px; max-width: 560px; line-height: 1.6; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; text-align: left; }
+.cards a { display: block; padding: 32px 28px; background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); border: 1px solid var(--border); border-radius: 20px; text-decoration: none; color: #fff; transition: all 0.4s ease; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.cards a::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--gold), var(--violet)); opacity: 0; transition: opacity 0.3s; }
+.cards a:hover { transform: translateY(-8px); border-color: rgba(201,162,39,0.4); box-shadow: 0 30px 80px rgba(124,58,237,0.2); }
+.cards a:hover::before { opacity: 1; }
+.cards a h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 1.2rem; margin-bottom: 8px; letter-spacing: -0.5px; }
+.cards a span { font-size: 0.85rem; color: rgba(255,255,255,0.4); }
