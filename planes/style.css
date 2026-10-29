@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 /* ==========================================================================
-   NOVA IA · WORKSPACE PRICING (EXACT SCREENSHOT REPLICA)
+   NOVA IA · WORKSPACE PRICING (EXACT SCREENSHOT REPLICA & ULTRA RESPONSIVE)
    ========================================================================== */
 
 :root {
@@ -38,6 +38,10 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body.planes-body {
   font-family: var(--font-sans);
   background-color: var(--bg-page);
@@ -46,28 +50,32 @@ body.planes-body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   padding-bottom: 90px;
+  overflow-x: hidden;
 }
 
 /* ==========================================================================
-   WORKSPACE TOP NAVBAR
+   WORKSPACE TOP NAVBAR (FLUID & ADAPTIVE)
    ========================================================================== */
 
 .workspace-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 36px;
+  padding: 12px clamp(16px, 3vw, 36px);
   background: #ffffff;
   border-bottom: 1px solid #f1f5f9;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  gap: 16px;
 }
 
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: clamp(14px, 2.5vw, 36px);
+  min-width: 0;
 }
 
 .brand-link {
@@ -76,6 +84,7 @@ body.planes-body {
   gap: 8px;
   text-decoration: none;
   color: var(--text-dark);
+  flex-shrink: 0;
 }
 
 .brand-glyph {
@@ -91,10 +100,11 @@ body.planes-body {
 }
 
 .brand-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.4px;
   color: #1e1b4b;
+  white-space: nowrap;
 }
 
 .brand-pill {
@@ -106,25 +116,34 @@ body.planes-body {
   padding: 2px 7px;
   border-radius: 6px;
   border: 1px solid #ede9fe;
+  white-space: nowrap;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-links .nav-item {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 14px;
+  padding: 7px 12px;
   color: #4b5563;
   text-decoration: none;
   font-size: 13.5px;
   font-weight: 500;
   border-radius: 9999px;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
 .nav-links .nav-item:hover {
@@ -151,18 +170,20 @@ body.planes-body {
   background: #ffffff;
   border: 1px solid #f1f5f9;
   border-radius: 9999px;
+  flex-shrink: 0;
 }
 
 .user-avatar {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: #e0e7ff;
   color: #4338ca;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12.5px;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
 }
 
 .user-meta {
@@ -175,6 +196,7 @@ body.planes-body {
   font-weight: 600;
   color: #111827;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .user-plan {
@@ -186,15 +208,16 @@ body.planes-body {
 .logout-btn {
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   border: 1px solid #e5e7eb;
   background: #ffffff;
   color: #6b7280;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
   transition: all 0.15s ease;
+  flex-shrink: 0;
 }
 
 .logout-btn:hover {
@@ -203,37 +226,40 @@ body.planes-body {
 }
 
 /* ==========================================================================
-   MAIN HERO
+   MAIN HERO CONTAINER
    ========================================================================== */
 
 .planes-container {
-  max-width: 1140px;
+  width: 100%;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 48px 24px 0;
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 24px) 0;
 }
 
 .hero-header-row {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: 20px;
+  margin-bottom: clamp(24px, 4vw, 40px);
+  flex-wrap: wrap;
 }
 
 .hero-titles h1 {
   font-family: var(--font-serif);
-  font-size: clamp(3.2rem, 5vw, 4.4rem);
+  font-size: clamp(2.5rem, 6vw, 4.4rem);
   font-weight: 600;
   line-height: 1.05;
   color: #111827;
   letter-spacing: -0.02em;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .hero-titles p {
   color: var(--text-muted);
-  font-size: 1.05rem;
-  max-width: 600px;
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  max-width: 620px;
+  line-height: 1.6;
 }
 
 .status-badge {
@@ -248,6 +274,7 @@ body.planes-body {
   color: #4b5563;
   font-weight: 500;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
 }
 
 .status-dot {
@@ -256,27 +283,28 @@ body.planes-body {
 }
 
 /* ==========================================================================
-   PLANS GRID (3 CARDS)
+   PLANS GRID (RESPONSIVE 3-COLUMN OR ADAPTIVE)
    ========================================================================== */
 
 .plans-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 24px);
   align-items: stretch;
-  margin-bottom: 56px;
+  margin-bottom: clamp(36px, 5vw, 56px);
 }
 
 .plan-card {
   background: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: 20px;
-  padding: 32px 28px;
+  padding: clamp(22px, 2.5vw, 32px) clamp(18px, 2.2vw, 28px);
   display: flex;
   flex-direction: column;
   transition: all 0.25s var(--ease);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   position: relative;
+  min-width: 0;
 }
 
 .plan-card:hover {
@@ -299,11 +327,12 @@ body.planes-body {
 .card-header {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .card-header.space-between {
   justify-content: space-between;
+  gap: 8px;
 }
 
 .card-icon-box {
@@ -315,32 +344,37 @@ body.planes-body {
   display: grid;
   place-items: center;
   font-size: 16px;
+  flex-shrink: 0;
 }
 
 .badge-group {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .badge-purple {
-  padding: 4px 9px;
+  padding: 3px 8px;
   border-radius: 9999px;
   font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: #6d28d9;
   background: #ede9fe;
+  white-space: nowrap;
 }
 
 .badge-green {
-  padding: 4px 9px;
+  padding: 3px 8px;
   border-radius: 9999px;
   font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--green-pill-text);
   background: var(--green-pill-bg);
+  white-space: nowrap;
 }
 
 /* Kicker and Title */
@@ -351,10 +385,11 @@ body.planes-body {
   color: var(--text-kicker);
   margin-bottom: 6px;
   text-transform: uppercase;
+  display: block;
 }
 
 .plan-title {
-  font-size: 1.85rem;
+  font-size: clamp(1.6rem, 2.5vw, 1.85rem);
   font-weight: 700;
   color: #111827;
   letter-spacing: -0.03em;
@@ -365,17 +400,17 @@ body.planes-body {
   color: var(--text-muted);
   font-size: 0.88rem;
   line-height: 1.5;
-  margin-bottom: 24px;
-  min-height: 42px;
+  margin-bottom: 20px;
+  min-height: 40px;
 }
 
 /* Price */
 .plan-price-block {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .price-value {
-  font-size: 2.4rem;
+  font-size: clamp(2rem, 3.2vw, 2.4rem);
   font-weight: 700;
   color: #111827;
   letter-spacing: -0.03em;
@@ -388,14 +423,14 @@ body.planes-body {
   margin-top: 6px;
 }
 
-/* Quota Divider (NO STORAGE - ONLY TOKENS!) */
+/* Quota Divider (NO STORAGE MENTION) */
 .quota-divider {
-  padding: 16px 0;
+  padding: 14px 0;
   border-top: 1px solid #f1f5f9;
   border-bottom: 1px solid #f1f5f9;
   font-size: 0.92rem;
   color: #1e293b;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .quota-divider strong {
@@ -407,7 +442,7 @@ body.planes-body {
 /* Features List */
 .plan-features {
   flex: 1;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .features-label {
@@ -415,7 +450,7 @@ body.planes-body {
   font-size: 11.5px;
   font-weight: 700;
   color: #111827;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   text-transform: capitalize;
 }
 
@@ -444,6 +479,7 @@ body.planes-body {
   font-weight: 700;
   font-size: 13px;
   flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .cross-icon {
@@ -451,6 +487,7 @@ body.planes-body {
   font-weight: 700;
   font-size: 12px;
   flex-shrink: 0;
+  margin-top: 1px;
 }
 
 /* Action Buttons */
@@ -464,7 +501,8 @@ body.planes-body {
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 13px 20px;
+  min-height: 44px;
+  padding: 12px 18px;
   border-radius: 12px;
   font-size: 0.92rem;
   font-weight: 600;
@@ -472,6 +510,7 @@ body.planes-body {
   text-decoration: none;
   transition: all 0.2s var(--ease);
   font-family: inherit;
+  box-sizing: border-box;
 }
 
 .btn-outline {
@@ -513,18 +552,20 @@ body.planes-body {
 }
 
 /* ==========================================================================
-   COMPARISON TABLE SECTION
+   COMPARISON TABLE SECTION (ALWAYS SCROLLABLE ON OVERFLOW)
    ========================================================================== */
 
 .comparison-section {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .comparison-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .section-tag {
@@ -534,12 +575,12 @@ body.planes-body {
   color: #6366f1;
   text-transform: uppercase;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .comparison-header h2 {
   font-family: var(--font-serif);
-  font-size: 2.3rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
   font-weight: 600;
   color: #111827;
   letter-spacing: -0.01em;
@@ -556,24 +597,36 @@ body.planes-body {
   font-size: 11.5px;
   color: #4b5563;
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 .table-card {
   background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: 18px;
-  overflow: hidden;
+  overflow-x: auto;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.table-card::-webkit-scrollbar {
+  height: 6px;
+}
+.table-card::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 6px;
 }
 
 .comparison-table {
   width: 100%;
+  min-width: 620px;
   border-collapse: collapse;
   text-align: left;
 }
 
 .comparison-table th {
-  padding: 16px 24px;
+  padding: 14px 20px;
   font-size: 12.5px;
   font-weight: 600;
   color: #6b7280;
@@ -582,7 +635,7 @@ body.planes-body {
 }
 
 .comparison-table td {
-  padding: 18px 24px;
+  padding: 16px 20px;
   font-size: 13.5px;
   color: #374151;
   border-bottom: 1px solid #f8fafc;
@@ -597,42 +650,99 @@ body.planes-body {
 }
 
 /* ==========================================================================
-   RESPONSIVE
+   PRECISION RESPONSIVE BREAKPOINTS
    ========================================================================== */
 
-@media (max-width: 992px) {
+/* Laptops / Mid Tablets (880px to 1080px) */
+@media (max-width: 1080px) {
+  .plans-grid {
+    gap: 16px;
+  }
+
+  .plan-card {
+    padding: 24px 20px;
+  }
+}
+
+/* Medium Tablets & Snapped PC Windows (720px to 880px) */
+@media (max-width: 880px) {
+  .plans-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plan-card.plus {
+    grid-column: span 2;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .workspace-navbar {
+    padding: 10px 16px;
+  }
+
+  .user-meta {
+    display: none;
+  }
+}
+
+/* Small Tablets & Mobile Phones (< 720px) */
+@media (max-width: 720px) {
   .plans-grid {
     grid-template-columns: 1fr;
-    max-width: 480px;
-    margin: 0 auto 48px;
+    max-width: 520px;
+    margin: 0 auto 40px;
+  }
+
+  .plan-card.plus {
+    grid-column: auto;
+    max-width: none;
   }
 
   .hero-header-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 14px;
   }
 
   .workspace-navbar {
-    padding: 12px 20px;
+    flex-wrap: wrap;
+    padding: 10px 14px;
   }
 
   .nav-left {
-    gap: 16px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .user-pill {
+    margin-left: auto;
+  }
+
+  .comparison-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 }
 
-@media (max-width: 640px) {
-  .workspace-navbar {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
+/* Ultra-compact mobile screens (< 480px) */
+@media (max-width: 480px) {
+  .brand-pill {
+    display: none;
   }
 
-  .nav-links {
-    flex-wrap: wrap;
+  .nav-links .nav-item {
+    padding: 6px 10px;
+    font-size: 12.5px;
   }
 
-  .table-card {
-    overflow-x: auto;
+  .plan-card {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .price-value {
+    font-size: 2rem;
   }
 }
