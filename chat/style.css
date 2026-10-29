@@ -1,480 +1,55 @@
 
-/* ==========================================
-   NOVA UI FIX — Layout, scroll y responsive
-   ========================================== */
+/* FIX: panel lateral y plan mensual */
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  margin: 0;
-  overflow: hidden;
-}
-
-body {
-  background-color: #0f0f13;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* Distribución principal */
-.app {
-  display: grid;
-  grid-template-columns: 255px minmax(0, 1fr);
-  width: 100%;
-  height: 100vh;
+.sidebar {
   height: 100dvh;
   min-height: 0;
-  padding: 0;
-  gap: 0;
-  overflow: hidden;
-}
-
-/* Barra lateral independiente */
-.sidebar {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  height: 100%;
-  padding: 20px 12px 14px;
   overflow-x: hidden;
   overflow-y: auto;
-
-  background: #141419;
-  border-right: 1px solid #292831;
-  border-radius: 0;
-  box-shadow: none;
-  scrollbar-width: thin;
-  scrollbar-color: #393542 transparent;
-}
-
-.brand {
-  flex-shrink: 0;
-  padding: 3px 7px 22px;
-}
-
-.new-chat {
-  flex-shrink: 0;
-}
-
-.section-label {
-  flex-shrink: 0;
-  margin-top: 25px;
-}
-
-.memory-card {
-  flex-shrink: 0;
-}
-
-.memory-status {
-  flex-shrink: 0;
-  flex-wrap: wrap;
-  line-height: 1.5;
+  padding-bottom: 16px;
 }
 
 .usage {
   flex-shrink: 0;
-  margin-top: auto;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.usage-heading,
+.usage-numbers {
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.usage-numbers strong {
+  font-size: clamp(13px, 1.2vw, 17px);
+  overflow-wrap: anywhere;
+}
+
+.usage-note {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .profile {
   flex-shrink: 0;
+  margin-top: 0;
+  padding-bottom: 4px;
 }
 
-/* Área principal: nunca debe empujar el viewport */
-.main {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #0f0f13;
-}
-
-/* Cabecera fija */
-.topbar {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex: 0 0 66px;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 0;
-  height: 66px;
-  padding: 0 24px;
-
-  background: #101014;
-  border-bottom: 1px solid #25242c;
-}
-
-.topbar-left,
-.topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-}
-
-.model-select {
-  max-width: min(220px, 35vw);
-}
-
-/* Chat ocupa exclusivamente el espacio restante */
-.chat {
-  display: flex;
-  flex: 1 1 0;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-/* Solo esta zona se desplaza */
-.messages {
-  flex: 1 1 0;
-  min-width: 0;
-  min-height: 0;
-  width: 100%;
-  padding: 30px 24px 38px;
-
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: #393542 transparent;
-  scroll-behavior: smooth;
-}
-
-.messages::-webkit-scrollbar {
-  width: 6px;
-}
-
-.messages::-webkit-scrollbar-thumb {
-  background: #393542;
-  border-radius: 10px;
-}
-
-/* Limita el ancho del contenido */
-.conversation {
-  width: 100%;
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-/* Bienvenida centrada, sin ocupar espacio infinito */
-.welcome {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  min-height: min(430px, 100%);
-  padding: 34px 0 30px;
-  text-align: center;
-}
-
-.welcome-symbol {
-  flex-shrink: 0;
-  margin-bottom: 20px;
-}
-
-.welcome h1 {
-  max-width: 100%;
-  font-size: clamp(24px, 2.5vw, 35px);
-  line-height: 1.2;
-  letter-spacing: -1.2px;
-}
-
-.welcome > p {
-  width: 100%;
-  max-width: 440px;
-  margin: 13px auto 25px;
-  padding: 0 8px;
-
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-/* Tarjetas con espacios uniformes */
-.suggestions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-
-  width: 100%;
-  max-width: 540px;
-  margin: 0 auto;
-}
-
-.suggestion {
-  width: 100%;
-  min-width: 0;
-  min-height: 68px;
-  padding: 13px 14px;
-  overflow-wrap: anywhere;
-
-  border-radius: 12px;
-  text-align: left;
-}
-
-.suggestion strong {
-  line-height: 1.5;
-}
-
-.suggestion span {
-  display: block;
-  line-height: 1.55;
-}
-
-/* Mensajes normales */
-.message {
-  max-width: min(88%, 680px);
-  overflow-wrap: anywhere;
-}
-
-.message.user {
-  margin-left: auto;
-}
-
-.message.bot {
-  margin-right: auto;
-}
-
-/* El compositor permanece abajo y nunca tapa las tarjetas */
-.composer-wrap {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 auto;
-
-  width: 100%;
-  padding: 12px 24px 12px;
-
-  background: #0f0f13;
-  border-top: 1px solid rgba(255, 255, 255, 0.035);
-}
-
-.composer {
-  width: 100%;
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.composer textarea {
-  width: 100%;
-  min-height: 35px;
-  max-height: 140px;
-  resize: none;
-}
-
-.composer-bottom {
-  gap: 12px;
-}
-
-.disclaimer {
-  margin: 8px auto 0;
-  line-height: 1.5;
-}
-
-/* Escritorios de poca altura, como la captura */
-@media (min-width: 651px) and (max-height: 760px) {
-  .welcome {
-    min-height: 0;
-    padding: 20px 0 22px;
-  }
-
-  .welcome-symbol {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 17px;
-  }
-
-  .welcome > p {
-    margin: 10px auto 18px;
-  }
-
-  .suggestion {
-    min-height: 62px;
-    padding: 10px 13px;
-  }
-
-  .messages {
-    padding-top: 18px;
-    padding-bottom: 24px;
-  }
-
-  .composer-wrap {
-    padding-top: 10px;
-    padding-bottom: 9px;
-  }
-
-  .composer {
-    padding: 10px 12px;
-  }
-}
-
-/* Pantallas medianas */
-@media (max-width: 900px) {
-  .app {
-    grid-template-columns: 225px minmax(0, 1fr);
-  }
-
+/* En pantallas bajas, el plan sigue accesible al desplazarse */
+@media (max-height: 760px) {
   .sidebar {
-    padding-right: 10px;
-    padding-left: 10px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #393542 transparent;
   }
 
-  .topbar {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  .messages {
-    padding-right: 18px;
-    padding-left: 18px;
-  }
-
-  .composer-wrap {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-}
-
-/* Celulares */
-@media (max-width: 650px) {
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .app {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100dvh;
-    min-height: 0;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .main {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-  }
-
-  .topbar {
-    flex-basis: 58px;
-    height: 58px;
-    padding: 0 12px;
-  }
-
-  .topbar-left,
-  .topbar-actions {
-    gap: 7px;
-  }
-
-  .model-select {
-    max-width: 150px;
-    padding: 8px;
-    font-size: 12px;
-  }
-
-  .status {
-    display: none;
-  }
-
-  .chat {
-    flex: 1 1 0;
-    height: 0;
-    min-height: 0;
-  }
-
-  .messages {
-    padding: 20px 14px 26px;
-  }
-
-  .welcome {
-    min-height: 0;
-    padding: 7vh 0 24px;
-  }
-
-  .welcome-symbol {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 18px;
-  }
-
-  .welcome h1 {
-    font-size: clamp(23px, 6vw, 29px);
-    letter-spacing: -0.8px;
-  }
-
-  .welcome > p {
-    max-width: 360px;
-    margin: 12px auto 20px;
-    font-size: 12px;
-  }
-
-  .suggestions {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
-    max-width: 420px;
-  }
-
-  .suggestion {
-    min-height: 0;
-    padding: 12px;
-  }
-
-  .composer-wrap {
-    padding: 10px 11px max(10px, env(safe-area-inset-bottom));
-  }
-
-  .composer {
-    padding: 10px 11px;
-    border-radius: 14px;
-  }
-
-  .composer textarea {
-    font-size: 13px;
-  }
-
-  .composer-hint {
-    max-width: 220px;
-    font-size: 10px;
-    line-height: 1.5;
-  }
-
-  .send-btn {
-    min-width: 40px;
-    padding: 9px 12px;
-  }
-
-  .disclaimer {
-    font-size: 9px;
-  }
-}
-
-/* Accesibilidad */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation: none !important;
-    transition: none !important;
+  .usage {
+    margin-top: 16px;
   }
 }
