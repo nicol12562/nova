@@ -3,62 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planes</title>
-    <link rel="stylesheet" href="/style.css?v=3">
-    <link rel="stylesheet" href="/planes/style.css?v=3">
-    <link rel="stylesheet" href="style.css?v=3">
+    <title>Planes — Nova IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css?v=4">
+    <link rel="stylesheet" href="/planes/style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
-<body>
-    <nav class="nav">
-        <a href="/" class="logo">Nova</a>
-        <a href="/chat">Chat</a>
-        <a href="/planes" class="active">Planes</a>
-        <a href="/admin">Admin</a>
-        <a href="/api">API</a>
-    </nav>
-    <div class="planes-container">
-        <header class="planes-header">
-            <h1>Plan de <span>Contexto</span></h1>
-            <p>Hasta 1.000.000 de tokens/mes en gratuito. Continuá meses después sin empezar de cero.</p>
-        </header>
-        <div class="plans-grid">
-            <div class="plan-card free">
-                <div class="plan-badge">Gratuito</div>
-                <h2>Gratuito</h2>
-                <div class="price">$0<span>/mes</span></div>
-                <ul>
-                    <li>✓ Hasta 5 proyectos</li>
-                    <li>✓ 10 GB de almacenamiento</li>
-                    <li>✓ Comunidad en línea</li>
-                </ul>
-                <button class="plan-btn">Comenzar</button>
-            </div>
-            <div class="plan-card pro">
-                <div class="plan-badge">Más popular</div>
-                <h2>Pro</h2>
-                <div class="price">$9<span>/mes</span></div>
-                <ul>
-                    <li>✓ Proyectos ilimitados</li>
-                    <li>✓ 100 GB de almacenamiento</li>
-                    <li>✓ Soporte prioritario</li>
-                    <li>✓ Analíticas avanzadas</li>
-                </ul>
-                <button class="plan-btn">Comenzar</button>
-            </div>
-            <div class="plan-card enterprise">
-                <div class="plan-badge">Empresarial</div>
-                <h2>Empresarial</h2>
-                <div class="price">Personalizado</div>
-                <ul>
-                    <li>✓ Todo lo de Pro</li>
-                    <li>✓ Almacenamiento ilimitado</li>
-                    <li>✓ Gestor de cuenta dedicado</li>
-                    <li>✓ API personalizada</li>
-                </ul>
-                <button class="plan-btn">Contactar</button>
+<body class="planes-body">
+
+    <!-- Top Workspace Navbar -->
+    <header class="workspace-navbar">
+        <div class="nav-left">
+            <a href="/" class="brand-link">
+                <div class="brand-glyph">✦</div>
+                <span class="brand-title">nova ia</span>
+                <span class="brand-pill">WORKSPACE</span>
+            </a>
+            <nav class="nav-links">
+                <a href="/" class="nav-item">
+                    <span class="nav-icon">⌂</span> Inicio
+                </a>
+                <a href="/chat" class="nav-item">
+                    <span class="nav-icon">💬</span> Chat
+                </a>
+                <a href="/planes" class="nav-item active">
+                    <span class="nav-icon">👑</span> Planes
+                </a>
+                <a href="/admin" class="nav-item">
+                    <span class="nav-icon">🤖</span> Mini agentes
+                </a>
+                <a href="/feedback" class="nav-item">
+                    <span class="nav-icon">💭</span> Feedback
+                </a>
+            </nav>
+        </div>
+
+        <div class="nav-right">
+            <div class="user-pill">
+                <div class="user-avatar">G</div>
+                <div class="user-meta">
+                    <span class="user-name">Gonzalo Angiolini</span>
+                    <span class="user-plan">Plan Pro</span>
+                </div>
+                <a href="/" class="logout-btn" title="Cerrar sesión" aria-label="Salir">↪</a>
             </div>
         </div>
-    </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="planes-container">
+
+        <!-- Hero Section -->
+        <section class="planes-hero">
+            <div class="hero-header-row">
+                <div class="hero-titles">
+                    <h1>Elegí tu ritmo.</h1>
+                    <p>Compará las cuotas mensuales y elegí el nivel de uso que acompaña tus proyectos.</p>
+                </div>
+                <div class="status-badge">
+                    <span class="status-dot">●</span> Nova IA · Tu espacio
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Cards Pricing Grid -->
+        <section class="plans-grid">
+
+            <!-- Card 1: Gratis -->
+            <div class="plan-card gratis">
+                <div class="card-header">
+                    <div class="card-icon-box">👑</div>
+                </div>
+                <span class="plan-kicker">PARA EMPEZAR</span>
+                <h2 class="plan-title">Gratis</h2>
+                <p class="plan-desc">Probá Nova y resolvé consultas puntuales sin pagar.</p>
+
+                <div class="plan-price-block">
+                    <div class="price-value">$0</div>
+                    <div class="price-sub">para siempre</div>
+                </div>
+
+                <div class="quota-divider">
+                    <strong>1.000.000</strong> tokens / mes
+                </div>
+
+                <div class="plan-features">
+                    <span class="features-label">Incluye</span>
+                    <ul class="features-list">
+                        <li><span class="check-icon">✓</span> Nova Flash para consultas diarias</li>
+                        <li><span class="check-icon">✓</span> Acceso limitado a modelos avanzados</li>
+                        <li><span class="check-icon">✓</span> Historial de conversaciones</li>
+                        <li class="disabled"><span class="cross-icon">✕</span> Sin mini agentes personalizados</li>
+                    </ul>
+                </div>
+
+                <div class="card-action">
+                    <button class="plan-btn btn-outline" data-plan="Gratis">Plan gratuito →</button>
+                </div>
+            </div>
+
+            <!-- Card 2: Pro (Selected) -->
+            <div class="plan-card pro selected">
+                <div class="card-header space-between">
+                    <div class="card-icon-box">👑</div>
+                    <div class="badge-group">
+                        <span class="badge-purple">MÁS ELEGIDO</span>
+                        <span class="badge-green">TU PLAN</span>
+                    </div>
+                </div>
+                <span class="plan-kicker">PARA EL DÍA A DÍA</span>
+                <h2 class="plan-title">Pro</h2>
+                <p class="plan-desc">Para estudiar, trabajar, programar y crear con más margen.</p>
+
+                <div class="plan-price-block">
+                    <div class="price-value">$20.000</div>
+                    <div class="price-sub">ARS / mes</div>
+                </div>
+
+                <div class="quota-divider">
+                    <strong>2.500.000</strong> tokens / mes
+                </div>
+
+                <div class="plan-features">
+                    <span class="features-label">Incluye</span>
+                    <ul class="features-list">
+                        <li><span class="check-icon">✓</span> Más cuota mensual de Nova</li>
+                        <li><span class="check-icon">✓</span> Mayor margen para modelos avanzados</li>
+                        <li><span class="check-icon">✓</span> Mini agentes personalizados</li>
+                        <li><span class="check-icon">✓</span> Solicitudes de activación manual</li>
+                    </ul>
+                </div>
+
+                <div class="card-action">
+                    <button class="plan-btn btn-active" data-plan="Pro">Tu plan actual</button>
+                </div>
+            </div>
+
+            <!-- Card 3: Plus -->
+            <div class="plan-card plus">
+                <div class="card-header">
+                    <div class="card-icon-box">👑</div>
+                </div>
+                <span class="plan-kicker">PARA USO INTENSIVO</span>
+                <h2 class="plan-title">Plus</h2>
+                <p class="plan-desc">Para sesiones largas, proyectos complejos y uso frecuente.</p>
+
+                <div class="plan-price-block">
+                    <div class="price-value">$40.000</div>
+                    <div class="price-sub">ARS / mes</div>
+                </div>
+
+                <div class="quota-divider">
+                    <strong>5.000.000</strong> tokens / mes
+                </div>
+
+                <div class="plan-features">
+                    <span class="features-label">Incluye</span>
+                    <ul class="features-list">
+                        <li><span class="check-icon">✓</span> La cuota mensual más alta</li>
+                        <li><span class="check-icon">✓</span> Más margen para modelos avanzados</li>
+                        <li><span class="check-icon">✓</span> Mini agentes personalizados</li>
+                        <li><span class="check-icon">✓</span> Solicitudes de activación manual</li>
+                    </ul>
+                </div>
+
+                <div class="card-action">
+                    <a href="https://wa.me/?text=Hola%2C%20quiero%20consultar%20por%20el%20Plan%20Plus%20de%20Nova%20IA" target="_blank" class="plan-btn btn-whatsapp" data-plan="Plus">
+                        <span class="wa-icon">💬</span> Consultar por WhatsApp →
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Comparison Table Section -->
+        <section class="comparison-section">
+            <div class="comparison-header">
+                <div>
+                    <span class="section-tag">COMPARACIÓN RÁPIDA</span>
+                    <h2>Lo importante, a la vista.</h2>
+                </div>
+                <div class="shield-badge">
+                    <span>🛡️</span> Activación manual
+                </div>
+            </div>
+
+            <div class="table-card">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Gratis</th>
+                            <th>Pro</th>
+                            <th>Plus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cuota mensual</td>
+                            <td>1 millón</td>
+                            <td><strong>2,5 millones</strong></td>
+                            <td><strong>5 millones</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Modelos avanzados</td>
+                            <td>Limitado</td>
+                            <td>Más cuota</td>
+                            <td>Mayor cuota</td>
+                        </tr>
+                        <tr>
+                            <td>Mini agentes personalizados</td>
+                            <td>No</td>
+                            <td>Sí</td>
+                            <td>Sí</td>
+                        </tr>
+                        <tr>
+                            <td>Memoria de contexto a largo plazo</td>
+                            <td>Estándar</td>
+                            <td>Prioritaria</td>
+                            <td>Máxima prioridad</td>
+                        </tr>
+                        <tr>
+                            <td>Canal de soporte</td>
+                            <td>Comunidad</td>
+                            <td>Prioritario</td>
+                            <td>WhatsApp directo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
     <script src="script.js"></script>
+    <script src="/desktop-nav.js"></script>
 </body>
 </html>

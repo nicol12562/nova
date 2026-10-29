@@ -1,0 +1,28 @@
+{
+  "name": "nova-desktop",
+  "version": "1.0.0",
+  "description": "Nova AI — Aplicación nativa de escritorio para PC",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win portable"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicol12562/nova.git"
+  },
+  "keywords": [
+    "nova",
+    "ai",
+    "desktop",
+    "electron",
+    "windows"
+  ],
+  "author": "Nova Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^45.1.0"
+  }
+}
