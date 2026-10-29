@@ -3,21 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>Nova — Chat con memoria</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="chat-container">
-        <header class="chat-header">
-            <h1>Chat</h1>
-        </header>
-        <div class="chat-messages" id="messages">
-            <div class="message bot">Hola, ¿en qué puedo ayudarte?</div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="user-input" placeholder="Escribe un mensaje..." autocomplete="off">
-            <button id="send-btn">Enviar</button>
-        </div>
+    <div class="chat-wrapper">
+        <aside class="context-sidebar">
+            <h2>Memoria activa</h2>
+            <div class="memory-block">
+                <h4>Tu proyecto principal</h4>
+                <p>Desarrollo de una IA conversacional con contexto largo para usuarios latinoamericanos.</p>
+            </div>
+            <div class="memory-block">
+                <h4>Cómo trabajás</h4>
+                <p>Preferís escribir, luego iterar, y guardar notas para seguir más tarde sin empezar de cero.</p>
+            </div>
+            <div class="memory-block">
+                <h4>Lo importante</h4>
+                <p>Te importa que la IA recuerde proyectos, fechas y decisiones clave entre sesiones.</p>
+            </div>
+            <div class="token-bar"><span>Gratuito</span><strong>1M tokens / mes</strong></div>
+        </aside>
+        <main class="chat-container">
+            <header class="chat-header">
+                <h1>Nova <span>Chat</span></h1>
+                <p>Recordá dónde lo dejaste.</p>
+            </header>
+            <section class="chat-messages" id="messages">
+                <div class="message bot"><strong>Nova</strong> — Hola. Todavía tengo tu proyecto en memoria. ¿Seguimos con el diseño de la ventana de contexto o preferís que recordemos algo nuevo sobre tu forma de trabajar?</div>
+            </section>
+            <div class="chat-input-area">
+                <input type="text" id="user-input" placeholder="Escribí como si conversaras con alguien que te conoce..." autocomplete="off">
+                <button id="send-btn">Enviar</button>
+            </div>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>
