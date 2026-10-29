@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="nav">
+        <a href="/" class="logo">Nova</a>
+        <a href="/chat">Chat</a>
+        <a href="/planes">Planes</a>
+        <a href="/admin">Admin</a>
+        <a href="/api" class="active">API</a>
+    </nav>
     <div class="api-container">
         <header class="api-header">
             <h1>API de Nova</h1>
@@ -18,14 +25,14 @@
                 <div class="endpoint-method get">GET</div>
                 <div class="endpoint-info">
                     <code>/api/users</code>
-                    <span class="endpoint-desc">Obtener lista de _users</span>
+                    <span class="endpoint-desc">Obtener lista de usuarios</span>
                 </div>
             </div>
             <div class="endpoint-card">
                 <div class="endpoint-method post">POST</div>
                 <div class="endpoint-info">
                     <code>/api/users</code>
-                    <span class="endpoint-desc">Cre nuevo _user</span>
+                    <span class="endpoint-desc">Crear nuevo usuario</span>
                 </div>
             </div>
             <div class="endpoint-card">
