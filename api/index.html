@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="api-container">
+        <header class="api-header">
+            <h1>API de Nova</h1>
+            <p>Documentación de endpoints y ejemplos de uso</p>
+        </header>
+        <div class="api-section">
+            <h2>Endpoints Disponibles</h2>
+            <div class="endpoint-card">
+                <div class="endpoint-method get">GET</div>
+                <div class="endpoint-info">
+                    <code>/api/users</code>
+                    <span class="endpoint-desc">Obtener lista de _users</span>
+                </div>
+            </div>
+            <div class="endpoint-card">
+                <div class="endpoint-method post">POST</div>
+                <div class="endpoint-info">
+                    <code>/api/users</code>
+                    <span class="endpoint-desc">Cre nuevo _user</span>
+                </div>
+            </div>
+            <div class="endpoint-card">
+                <div class="endpoint-method get">GET</div>
+                <div class="endpoint-info">
+                    <code>/api/planes</code>
+                    <span class="endpoint-desc">Listar planes disponibles</span>
+                </div>
+            </div>
+            <div class="endpoint-card">
+                <div class="endpoint-method post">POST</div>
+                <div class="endpoint-info">
+                    <code>/api/planes/subscribe</code>
+                    <span class="endpoint-desc">Suscribirse a un plan</span>
+                </div>
+            </div>
+            <div class="endpoint-card">
+                <div class="endpoint-method post">POST</div>
+                <div class="endpoint-info">
+                    <code>/api/feedback</code>
+                    <span class="endpoint-desc">Enviar feedback</span>
+                </div>
+            </div>
+            <div class="endpoint-card">
+                <div class="endpoint-method get">GET</div>
+                <div class="endpoint-info">
+                    <code>/api/chat</code>
+                    <span class="endpoint-desc">Obtener historial de chat</span>
+                </div>
+            </div>
+        </div>
+        <div class="api-section">
+            <h2>Ejemplo de Uso</h2>
+            <pre class="code-block"><code>curl -X GET "https://api.nova.com/api/users" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Respuesta:
+{
+  "_users": [
+    { "id": 1, "name": "Juan", "email": "juan@ejemplo.com" },
+    { "id": 2, "name": "María", "email": "maria@ejemplo.com" }
+  ]
+}</code></pre>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

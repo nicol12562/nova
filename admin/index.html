@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Nova</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">Dashboard</a>
+                <a href="#" class="nav-item">_users</a>
+                <a href="#" class="nav-item">Planes</a>
+                <a href="#" class="nav-item">Configuración</a>
+            </nav>
+        </aside>
+        <main class="admin-content">
+            <header class="content-header">
+                <h1>Panel de Administración</h1>
+                <div class="user-info">
+                    <span>Admin</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">users</div>
+                    <div class="stat-info">
+                        <h3>1,234</h3>
+                        <p>_users totales</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">planes</div>
+                    <div class="stat-info">
+                        <h3>$8,540</h3>
+                        <p>Ingresos del mes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">proyectos</div>
+                    <div class="stat-info">
+                        <h3>89</h3>
+                        <p>Proyectos activos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">feedback</div>
+                    <div class="stat-info">
+                        <h3>42</h3>
+                        <p>Mensajes de feedback</p>
+                    </div>
+                </div>
+            </section>
+            <section class="recent-activity">
+                <h2>Actividad reciente</h2>
+                <table class="activity-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Actividad</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2026-10-29</td>
+                            <td>Nuevo usuario registrado</td>
+                            <td><span class="badge success">Completado</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-10-29</td>
+                            <td>Pago de plan Pro</td>
+                            <td><span class="badge success">Completado</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-10-28</td>
+                            <td>Feedback nuevo</td>
+                            <td><span class="badge warning">Pendiente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
