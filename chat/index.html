@@ -1,43 +1,755 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova — Chat con memoria</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101014">
+  <meta name="description" content="Nova, una IA conversacional que te ayuda a continuar donde lo dejaste.">
+  <title>Nova AI — Tu espacio de trabajo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101014;
+      --sidebar: #15151a;
+      --surface: #1b1b22;
+      --surface-hover: #24242d;
+      --border: #2b2b35;
+      --text: #f3f3f7;
+      --muted: #9999aa;
+      --accent: #a78bfa;
+      --accent-2: #818cf8;
+      --radius: 15px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      height: 100dvh;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "DM Sans", sans-serif;
+      font-size: 14px;
+    }
+
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      height: 100dvh;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 20px 14px 14px;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 3px 8px 25px;
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #a78bfa, #6366f1);
+      color: white;
+      font-size: 19px;
+      font-weight: 700;
+      box-shadow: 0 4px 20px #8b5cf633;
+    }
+
+    .brand-name { font-size: 19px; font-weight: 700; letter-spacing: -.7px; }
+    .brand-label { color: var(--muted); font-size: 11px; margin-top: 3px; }
+
+    .new-chat {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #393344;
+      border-radius: 11px;
+      background: #211d2c;
+      color: #e4dcff;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .new-chat:hover { background: #302640; }
+
+    .section-label {
+      margin: 28px 9px 12px;
+      color: #777786;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .memory-card {
+      padding: 13px;
+      margin-bottom: 9px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #1a1a20;
+    }
+
+    .memory-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .memory-icon { color: var(--accent); font-size: 15px; }
+    .memory-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .memory-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin: 12px 2px;
+      color: #b7b7c5;
+      font-size: 11px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #6ee7b7;
+      box-shadow: 0 0 10px #6ee7b744;
+    }
+
+    .usage {
+      padding: 15px;
+      margin-top: auto;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: #1b1b22;
+    }
+
+    .usage-heading, .usage-numbers {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .usage-heading { font-weight: 600; font-size: 12px; }
+    .plan-pill {
+      padding: 4px 7px;
+      border: 1px solid #3e3651;
+      border-radius: 6px;
+      color: #c4b5fd;
+      background: #282137;
+      font-size: 10px;
+    }
+
+    .usage-numbers { margin: 17px 0 10px; }
+    .usage-numbers strong { font-size: 17px; }
+    .usage-numbers span { color: var(--muted); font-size: 10px; }
+
+    .progress {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #34343e;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #a78bfa, #818cf8);
+    }
+
+    .usage-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 17px 5px 2px;
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #30303d;
+      color: #ddd6fe;
+      font-weight: 600;
+    }
+
+    .profile-name { font-size: 12px; font-weight: 600; }
+    .profile-plan { margin-top: 4px; color: var(--muted); font-size: 11px; }
+
+    .main {
+      display: flex;
+      min-width: 0;
+      min-height: 0;
+      flex-direction: column;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      height: 67px;
+      padding: 0 27px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-left, .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .model-select {
+      max-width: 220px;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      outline: none;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .status {
+      color: #a7a7b6;
+      font-size: 11px;
+    }
+
+    .icon-btn {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      background: transparent;
+      color: #b9b9c8;
+      font-size: 18px;
+    }
+
+    .icon-btn:hover { border-color: var(--border); background: var(--surface); }
+
+    .chat {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 38px 20px 30px;
+      scroll-behavior: smooth;
+    }
+
+    .conversation {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .welcome {
+      padding: 10vh 0 35px;
+      text-align: center;
+    }
+
+    .welcome-symbol {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 22px;
+      border: 1px solid #4c3c6c;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #282039, #1c1c2b);
+      color: #c4b5fd;
+      font-size: 27px;
+    }
+
+    .welcome h1 {
+      margin: 0;
+      font-size: clamp(25px, 3vw, 34px);
+      font-weight: 600;
+      letter-spacing: -1.3px;
+    }
+
+    .welcome > p {
+      max-width: 390px;
+      margin: 13px auto 25px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .suggestions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 540px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .suggestion {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #17171d;
+      color: #e4e4ec;
+      text-align: left;
+      transition: .2s;
+    }
+
+    .suggestion:hover { background: var(--surface-hover); border-color: #514568; }
+    .suggestion strong { display: block; margin-bottom: 6px; font-size: 12px; }
+    .suggestion span { color: var(--muted); font-size: 11px; line-height: 1.5; }
+
+    .message {
+      display: flex;
+      gap: 13px;
+      margin: 25px 0;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .message-avatar {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      color: #c4b5fd;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .message-content { min-width: 0; flex: 1; }
+    .message-author { margin: 4px 0 8px; font-size: 12px; font-weight: 600; }
+    .message-text { color: #d1d1dc; white-space: pre-wrap; font-size: 13px; }
+    .message.user .message-avatar { background: #302841; }
+    .message-text.error { color: #fca5a5; }
+
+    .composer-wrap {
+      padding: 12px 20px 17px;
+      background: linear-gradient(transparent, var(--bg) 15%);
+    }
+
+    .composer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 12px 12px 10px 16px;
+      border: 1px solid #383842;
+      border-radius: 16px;
+      background: #1b1b22;
+      box-shadow: 0 10px 40px #00000015;
+      transition: border-color .2s;
+    }
+
+    .composer:focus-within { border-color: #6d5a91; }
+
+    .composer textarea {
+      display: block;
+      width: 100%;
+      min-height: 35px;
+      max-height: 180px;
+      resize: none;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .composer textarea::placeholder { color: #777784; }
+
+    .composer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 10px;
+    }
+
+    .composer-hint { color: #777784; font-size: 10px; }
+
+    .send-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 80px;
+      padding: 9px 13px;
+      border: 0;
+      border-radius: 10px;
+      background: #a78bfa;
+      color: #171321;
+      font-size: 12px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .send-btn:hover { background: #c4b5fd; }
+    .send-btn:disabled { opacity: .5; cursor: wait; }
+
+    .disclaimer {
+      margin: 10px auto 0;
+      color: #696977;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 760px) {
+      .app { grid-template-columns: minmax(0, 1fr); }
+      .sidebar {
+        position: fixed;
+        z-index: 5;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: min(290px, 85vw);
+        box-shadow: 20px 0 60px #0008;
+        transform: translateX(-105%);
+        transition: transform .22s ease;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .topbar { height: 59px; padding: 0 13px; }
+      .topbar-left { gap: 8px; }
+      .model-select { max-width: 155px; }
+      .status { display: none; }
+      .messages { padding: 20px 16px; }
+      .welcome { padding-top: 7vh; }
+      .suggestions { grid-template-columns: 1fr; }
+      .composer-wrap { padding: 10px 12px 12px; }
+      .composer-hint { max-width: 190px; line-height: 1.5; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="chat-wrapper">
-        <aside class="context-sidebar">
-            <h2>Memoria activa</h2>
-            <div class="memory-block">
-                <h4>Tu proyecto principal</h4>
-                <p>Desarrollo de una IA conversacional con contexto largo para usuarios latinoamericanos.</p>
-            </div>
-            <div class="memory-block">
-                <h4>Cómo trabajás</h4>
-                <p>Preferís escribir, luego iterar, y guardar notas para seguir más tarde sin empezar de cero.</p>
-            </div>
-            <div class="memory-block">
-                <h4>Lo importante</h4>
-                <p>Te importa que la IA recuerde proyectos, fechas y decisiones clave entre sesiones.</p>
-            </div>
-            <div class="token-bar"><span>Gratuito</span><strong>1M tokens / mes</strong></div>
-        </aside>
-        <main class="chat-container">
-            <header class="chat-header">
-                <h1>Nova <span>Chat</span></h1>
-                <p>Recordá dónde lo dejaste.</p>
-            </header>
-            <section class="chat-messages" id="messages">
-                <div class="message bot"><strong>Nova</strong> — Hola. Todavía tengo tu proyecto en memoria. ¿Seguimos con el diseño de la ventana de contexto o preferís que recordemos algo nuevo sobre tu forma de trabajar?</div>
-            </section>
-            <div class="chat-input-area">
-                <input type="text" id="user-input" placeholder="Escribí como si conversaras con alguien que te conoce..." autocomplete="off">
-                <button id="send-btn">Enviar</button>
-            </div>
-        </main>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-icon">N</div>
+      <div>
+        <div class="brand-name">nova<span style="color:#a78bfa">.</span></div>
+        <div class="brand-label">Tu espacio de inteligencia</div>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <button class="new-chat" id="new-chat">＋ Nueva conversación</button>
+
+    <div class="section-label">Memoria de trabajo</div>
+
+    <div class="memory-card">
+      <div class="memory-title"><span class="memory-icon">◈</span> Proyecto principal</div>
+      <p>Desarrollo de una IA conversacional con contexto largo para usuarios latinoamericanos.</p>
+    </div>
+
+    <div class="memory-card">
+      <div class="memory-title"><span class="memory-icon">↗</span> Forma de trabajar</div>
+      <p>Iterar ideas, guardar decisiones y retomar tareas sin empezar de cero.</p>
+    </div>
+
+    <div class="memory-card">
+      <div class="memory-title"><span class="memory-icon">⌘</span> Preferencias</div>
+      <p>Continuidad entre sesiones, contexto útil y seguimiento de proyectos.</p>
+    </div>
+
+    <div class="memory-status">
+      <span class="dot"></span>
+      <span>Memoria de ejemplo · No sincronizada</span>
+    </div>
+
+    <div class="usage">
+      <div class="usage-heading">
+        <span>Uso mensual</span>
+        <span class="plan-pill">Free</span>
+      </div>
+      <div class="usage-numbers">
+        <strong id="usage-text">0 tokens</strong>
+        <span>de 1.000.000</span>
+      </div>
+      <div class="progress">
+        <div class="progress-fill" id="usage-fill"></div>
+      </div>
+      <div class="usage-note">Contador demostrativo. El consumo real debe calcularse desde el servidor.</div>
+    </div>
+
+    <div class="profile">
+      <div class="avatar">U</div>
+      <div>
+        <div class="profile-name">Mi cuenta</div>
+        <div class="profile-plan">Plan gratuito</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn" id="menu-btn" aria-label="Abrir menú">☰</button>
+        <select class="model-select" id="model-select" aria-label="Modelo de IA">
+          <option value="nova-flash">Nova Flash</option>
+          <option value="nova-pro">Nova Pro</option>
+          <option value="nova-pro-3.1">Nova Pro 3.1</option>
+        </select>
+      </div>
+      <div class="topbar-actions">
+        <span class="status"><span style="color:#6ee7b7">●</span> Interfaz lista</span>
+        <button class="icon-btn" id="clear-btn" aria-label="Limpiar conversación" title="Limpiar conversación">↺</button>
+      </div>
+    </header>
+
+    <section class="chat">
+      <div class="messages" id="messages" aria-live="polite">
+        <div class="conversation" id="conversation">
+          <div class="welcome" id="welcome">
+            <div class="welcome-symbol">✳</div>
+            <h1>Seguimos donde lo dejaste.</h1>
+            <p>Un espacio para pensar, crear y trabajar. Menos vueltas para recuperar el contexto. Más tiempo para avanzar.</p>
+
+            <div class="suggestions">
+              <button class="suggestion" data-prompt="Ayudame a organizar mi proyecto principal.">
+                <strong>◈ Organizar un proyecto</strong>
+                <span>Convertí tus ideas en un plan de trabajo.</span>
+              </button>
+              <button class="suggestion" data-prompt="Ayudame a desarrollar una idea desde cero.">
+                <strong>✳ Desarrollar una idea</strong>
+                <span>Explorá posibilidades y próximos pasos.</span>
+              </button>
+              <button class="suggestion" data-prompt="Ayudame a revisar y mejorar mi código.">
+                <strong>⌘ Revisar código</strong>
+                <span>Encontrá errores y mejorá tu implementación.</span>
+              </button>
+              <button class="suggestion" data-prompt="Prepará un resumen de decisiones y tareas pendientes para retomar después.">
+                <strong>↗ Retomar una tarea</strong>
+                <span>Organizá decisiones y pendientes.</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="composer-wrap">
+        <form class="composer" id="chat-form">
+          <textarea id="user-input" rows="1" maxlength="12000"
+            placeholder="Escribí tu mensaje a Nova..."
+            aria-label="Mensaje para Nova"></textarea>
+          <div class="composer-bottom">
+            <span class="composer-hint">Enter para enviar · Shift + Enter para nueva línea</span>
+            <button class="send-btn" id="send-btn" type="submit">
+              Enviar <span>↑</span>
+            </button>
+          </div>
+        </form>
+        <p class="disclaimer">Nova puede cometer errores. Verificá la información importante.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  const form = document.getElementById("chat-form");
+  const input = document.getElementById("user-input");
+  const conversation = document.getElementById("conversation");
+  const welcome = document.getElementById("welcome");
+  const sendBtn = document.getElementById("send-btn");
+  const sidebar = document.getElementById("sidebar");
+
+  // Datos temporales de esta demostración.
+  // No representan memoria persistente ni consumo real.
+  let messages = [];
+  let sending = false;
+
+  function addMessage(role, text, isError = false) {
+    const wrapper = document.createElement("div");
+    wrapper.className = `message ${role}`;
+
+    const avatar = document.createElement("div");
+    avatar.className = "message-avatar";
+    avatar.textContent = role === "user" ? "Tú" : "N";
+
+    const content = document.createElement("div");
+    content.className = "message-content";
+
+    const author = document.createElement("div");
+    author.className = "message-author";
+    author.textContent = role === "user" ? "Vos" : "Nova";
+
+    const body = document.createElement("div");
+    body.className = "message-text" + (isError ? " error" : "");
+    body.textContent = text;
+
+    content.append(author, body);
+    wrapper.append(avatar, content);
+    conversation.appendChild(wrapper);
+
+    document.getElementById("messages").scrollTop =
+      document.getElementById("messages").scrollHeight;
+
+    return wrapper;
+  }
+
+  function resetChat() {
+    messages = [];
+    conversation.replaceChildren();
+    conversation.appendChild(welcome);
+    welcome.classList.remove("hidden");
+    input.value = "";
+    input.focus();
+  }
+
+  function updateUsage(tokens) {
+    const limit = 1000000;
+    const used = Math.max(0, Math.min(limit, tokens));
+    document.getElementById("usage-text").textContent =
+      used.toLocaleString("es-AR") + " tokens";
+    document.getElementById("usage-fill").style.width =
+      (used / limit * 100) + "%";
+  }
+
+  async function sendMessage(text) {
+    text = text.trim();
+    if (!text || sending) return;
+
+    sending = true;
+    sendBtn.disabled = true;
+    welcome.classList.add("hidden");
+
+    messages.push({ role: "user", content: text });
+    addMessage("user", text);
+    input.value = "";
+    input.style.height = "auto";
+
+    const loading = addMessage("assistant", "Para responder de verdad, conectá Nova con tu API.");
+
+    try {
+      /*
+       * CONECTAR CON TU BACKEND:
+       *
+       * const response = await fetch("/api/chat", {
+       *   method: "POST",
+       *   headers: { "Content-Type": "application/json" },
+       *   body: JSON.stringify({
+       *     messages,
+       *     model: document.getElementById("model-select").value
+       *   })
+       * });
+       *
+       * if (!response.ok) throw new Error("No se pudo obtener una respuesta.");
+       * const data = await response.json();
+       * loading.querySelector(".message-text").textContent = data.reply;
+       * messages.push({ role: "assistant", content: data.reply });
+       * if (typeof data.totalTokens === "number") updateUsage(data.totalTokens);
+       *
+       * El backend debe validar el usuario, el plan, la cuota y el modelo.
+       * Nunca pongas la clave privada de OpenRouter en este archivo.
+       */
+
+      await new Promise(resolve => setTimeout(resolve, 350));
+      loading.querySelector(".message-text").textContent =
+        "La interfaz está funcionando, pero todavía no hay una API conectada. Configurá el endpoint del backend para obtener respuestas reales.";
+    } catch (error) {
+      loading.querySelector(".message-text").textContent =
+        "No se pudo conectar con Nova. Revisá la conexión e intentá nuevamente.";
+      loading.querySelector(".message-text").classList.add("error");
+    } finally {
+      sending = false;
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  }
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    sendMessage(input.value);
+  });
+
+  input.addEventListener("keydown", event => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      form.requestSubmit();
+    }
+  });
+
+  input.addEventListener("input", () => {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 180) + "px";
+  });
+
+  document.getElementById("new-chat").addEventListener("click", resetChat);
+  document.getElementById("clear-btn").addEventListener("click", resetChat);
+  document.getElementById("menu-btn").addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+  });
+
+  document.querySelectorAll(".suggestion").forEach(button => {
+    button.addEventListener("click", () => {
+      input.value = button.dataset.prompt;
+      input.focus();
+      input.style.height = "auto";
+      input.style.height = Math.min(input.scrollHeight, 180) + "px";
+    });
+  });
+</script>
 </body>
 </html>
